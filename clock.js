@@ -11,9 +11,9 @@ Module.register("clock",{
 		displayType: "digital", // options: digital, analog, both
 
 		timeFormat: config.timeFormat,
-		displaySeconds: false,
+		displaySeconds: true,
 		showPeriod: true,
-		showPeriodUpper: true,
+		showPeriodUpper: false,
 		clockBold: false,
 		showDate: true,
 		showWeek: false,
@@ -94,7 +94,7 @@ Module.register("clock",{
 			dateWrapper.innerHTML = now.format(this.config.dateFormat);
 		}
 		if (this.config.showWeek) {
-			weekWrapper.innerHTML = this.translate("WEEK") + " " + now.week();
+			weekWrapper.innerHTML = this.translate("WEEK", { weekNumber: now.week() });
 		}
 		timeWrapper.innerHTML = timeString;
 		secondsWrapper.innerHTML = now.format("ss");

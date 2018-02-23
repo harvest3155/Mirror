@@ -9,6 +9,11 @@
  */
 
 var config = {
+	address: "localhost", // Address to listen on, can be:
+	                      // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+	                      // - another specific IPv4/6 to listen on a specific interface
+	                      // - "", "0.0.0.0", "::" to listen on any interface
+	                      // Default, when address config is left out, is "localhost"
 	port: 8080,
 	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], // Set [] to allow all IP addresses
 	                                                       // or add a specific IPv4 of 192.168.1.5 :
@@ -17,8 +22,8 @@ var config = {
 	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
 
 	language: "en",
-	timeFormat: 12,
-	units: "imperial",
+	timeFormat: 24,
+	units: "metric",
 
 	modules: [
 		{
@@ -34,36 +39,28 @@ var config = {
 		},
 		{
 			module: "calendar",
-			header: "US Holidays!",
+			header: "US Holidays",
 			position: "top_left",
 			config: {
 				calendars: [
 					{
 						symbol: "calendar-check-o ",
 						url: "webcal://www.calendarlabs.com/templates/ical/US-Holidays.ics"
-					},
-					{
-						symbol: "calendar",
-						url: "https://calendar.google.com/calendar/ical/berres955%40gmail.com/public/basic.ics",
-					},
-					{
-						symbol: "beer",
-						url: "http://stanza.co/api/schedules/osu/m-footbl.ics",
-					},
+					}
 				]
 			}
 		},
-		/*{
+		{
 			module: "compliments",
 			position: "lower_third"
-		},*/
+		},
 		{
 			module: "currentweather",
 			position: "top_right",
 			config: {
-				location: "Loveland",
-				locationID: "5579368",  //ID from http://www.openweathermap.org/help/city_list.txt
-				appid: "f6b554debd8ab2d5b9deaf37993689bd"
+				location: "New York",
+				locationID: "",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "YOUR_OPENWEATHER_API_KEY"
 			}
 		},
 		{
@@ -71,12 +68,12 @@ var config = {
 			position: "top_right",
 			header: "Weather Forecast",
 			config: {
-				location: "Loveland",
-				locationID: "5579368",  //ID from http://www.openweathermap.org/help/city_list.txt
-				appid: "f6b554debd8ab2d5b9deaf37993689bd"
+				location: "New York",
+				locationID: "5128581",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "YOUR_OPENWEATHER_API_KEY"
 			}
 		},
-		/*{
+		{
 			module: "newsfeed",
 			position: "bottom_bar",
 			config: {
@@ -89,7 +86,7 @@ var config = {
 				showSourceTitle: true,
 				showPublishDate: true
 			}
-		},*/
+		},
 	]
 
 };

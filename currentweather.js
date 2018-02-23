@@ -11,9 +11,9 @@ Module.register("currentweather",{
 
 	// Default module config.
 	defaults: {
-		location: "Loveland",
-		locationID: 5579368,
-		appid: "f6b554debd8ab2d5b9deaf37993689bd",
+		location: false,
+		locationID: false,
+		appid: "",
 		units: config.units,
 		updateInterval: 10 * 60 * 1000, // every 10 minutes
 		animationSpeed: 1000,
@@ -24,22 +24,24 @@ Module.register("currentweather",{
 		showWindDirectionAsArrow: false,
 		useBeaufort: true,
 		lang: config.language,
-		showHumidity: true,
-		degreeLabel: true,
+		decimalSymbol: ".",
+		showHumidity: false,
+		degreeLabel: false,
 		showIndoorTemperature: false,
+		showIndoorHumidity: false,
 
 		initialLoadDelay: 0, // 0 seconds delay
 		retryDelay: 2500,
 
 		apiVersion: "2.5",
-		apiBase: "http://api.openweathermap.org/data/",
+		apiBase: "https://api.openweathermap.org/data/",
 		weatherEndpoint: "weather",
 
 		appendLocationNameToHeader: true,
 		calendarClass: "calendar",
 
 		onlyTemp: false,
-		roundTemp: true,
+		roundTemp: false,
 
 		iconTable: {
 			"01d": "wi-day-sunny",
@@ -101,6 +103,7 @@ Module.register("currentweather",{
 		this.sunriseSunsetIcon = null;
 		this.temperature = null;
 		this.indoorTemperature = null;
+		this.indoorHumidity = null;
 		this.weatherType = null;
 
 		this.loaded = false;
@@ -207,9 +210,13 @@ Module.register("currentweather",{
 			}
 		}
 
+		if (this.config.decimalSymbol === "") {
+			this.config.decimalSymbol = ".";
+		}
+
 		var temperature = document.createElement("span");
 		temperature.className = "bright";
-		temperature.innerHTML = " " + this.temperature + "&deg;" + degreeLabel;
+		temperature.innerHTML = " " + this.temperature.replace(".", this.config.decimalSymbol) + "&deg;" + degreeLabel;
 		large.appendChild(temperature);
 
 		if (this.config.showIndoorTemperature && this.indoorTemperature) {
@@ -219,8 +226,19 @@ Module.register("currentweather",{
 
 			var indoorTemperatureElem = document.createElement("span");
 			indoorTemperatureElem.className = "bright";
-			indoorTemperatureElem.innerHTML = " " + this.indoorTemperature + "&deg;" + degreeLabel;
+			indoorTemperatureElem.innerHTML = " " + this.indoorTemperature.replace(".", this.config.decimalSymbol) + "&deg;" + degreeLabel;
 			large.appendChild(indoorTemperatureElem);
+		}
+
+		if (this.config.showIndoorHumidity && this.indoorHumidity) {
+			var indoorHumidityIcon = document.createElement("span");
+			indoorHumidityIcon.className = "fa fa-tint";
+			large.appendChild(indoorHumidityIcon);
+
+			var indoorHumidityElem = document.createElement("span");
+			indoorHumidityElem.className = "bright";
+			indoorHumidityElem.innerHTML = " " + this.indoorHumidity + "%";
+			large.appendChild(indoorHumidityElem);
 		}
 
 		wrapper.appendChild(large);
@@ -260,6 +278,10 @@ Module.register("currentweather",{
 		}
 		if (notification === "INDOOR_TEMPERATURE") {
 			this.indoorTemperature = this.roundValue(payload);
+			this.updateDom(self.config.animationSpeed);
+		}
+		if (notification === "INDOOR_HUMIDITY") {
+			this.indoorHumidity = this.roundValue(payload);
 			this.updateDom(self.config.animationSpeed);
 		}
 	},
@@ -469,7 +491,7 @@ Module.register("currentweather",{
 	 *
 	 * argument temperature number - Temperature.
 	 *
-	 * return number - Rounded Temperature.
+	 * return string - Rounded Temperature.
 	 */
 	roundValue: function(temperature) {
 		var decimals = this.config.roundTemp ? 0 : 1;
