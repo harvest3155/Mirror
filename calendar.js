@@ -27,12 +27,12 @@ Module.register("calendar", {
 		dateFormat: "MMM Do",
 		fullDayEventDateFormat: "MMM Do",
 		getRelative: 6,
-		fadePoint: 0.25, // Start on 1/4th of the list.
+		fadePoint: 0.35, // Start on 1/4th of the list.
 		hidePrivate: false,
-		colored: false,
+		colored: true,
 		calendars: [
 			{
-				symbol: "calendar",
+				symbol: "calendar-o",
 				url: "http://www.calendarlabs.com/templates/ical/US-Holidays.ics",
 			},
 		],
@@ -79,7 +79,7 @@ Module.register("calendar", {
 			};
 
 			// we check user and password here for backwards compatibility with old configs
-			if(calendar.user && calendar.pass) {
+			if(calendar.user && calendar.pass){
 				Log.warn("Deprecation warning: Please update your calendar authentication configuration.");
 				Log.warn("https://github.com/MichMich/MagicMirror/tree/v2.1.2/modules/default/calendar#calendar-authentication-options");
 				calendar.auth = {
@@ -132,6 +132,20 @@ Module.register("calendar", {
 
 		for (var e in events) {
 			var event = events[e];
+
+			var excluded = false;
+			for (var f in this.config.excludedEvents) {
+				var filter = this.config.excludedEvents[f];
+				if (event.title.toLowerCase().includes(filter.toLowerCase())) {
+					excluded = true;
+					break;
+				}
+			}
+
+			if (excluded) {
+				continue;
+			}
+
 			var eventWrapper = document.createElement("tr");
 
 			if (this.config.colored) {
@@ -150,7 +164,7 @@ Module.register("calendar", {
 
 				for(var i = 0; i < symbols.length; i++) {
 					var symbol = document.createElement("span");
-					symbol.className = "fa fa-fw fa-" + symbols[i];
+					symbol.className = "fa fa-" + symbols[i];
 					if(i > 0){
 						symbol.style.paddingLeft = "5px";
 					}

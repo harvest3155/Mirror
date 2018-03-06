@@ -11,18 +11,18 @@ Module.register("weatherforecast",{
 
 	// Default module config.
 	defaults: {
-		location: false,
-		locationID: false,
-		appid: "",
+		location: "Loveland",
+		locationID: 4517140,
+		appid: "f6b554debd8ab2d5b9deaf37993689bd",
 		units: config.units,
 		maxNumberOfDays: 7,
-		showRainAmount: false,
+		showRainAmount: true,
 		updateInterval: 10 * 60 * 1000, // every 10 minutes
 		animationSpeed: 1000,
 		timeFormat: config.timeFormat,
 		lang: config.language,
 		decimalSymbol: ".",
-		fade: true,
+		fade: false,
 		fadePoint: 0.25, // Start on 1/4th of the list.
 		colored: false,
 		scale: false,
@@ -37,7 +37,7 @@ Module.register("weatherforecast",{
 		appendLocationNameToHeader: true,
 		calendarClass: "calendar",
 
-		roundTemp: false,
+		roundTemp: true,
 
 		iconTable: {
 			"01d": "wi-day-sunny",

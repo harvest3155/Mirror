@@ -11,9 +11,9 @@ Module.register("currentweather",{
 
 	// Default module config.
 	defaults: {
-		location: false,
-		locationID: false,
-		appid: "",
+		location: "Loveland",
+		locationID: 4517140,
+		appid: "f6b554debd8ab2d5b9deaf37993689bd",
 		units: config.units,
 		updateInterval: 10 * 60 * 1000, // every 10 minutes
 		animationSpeed: 1000,
@@ -25,8 +25,8 @@ Module.register("currentweather",{
 		useBeaufort: true,
 		lang: config.language,
 		decimalSymbol: ".",
-		showHumidity: false,
-		degreeLabel: false,
+		showHumidity: true,
+		degreeLabel: true,
 		showIndoorTemperature: false,
 		showIndoorHumidity: false,
 
@@ -41,7 +41,7 @@ Module.register("currentweather",{
 		calendarClass: "calendar",
 
 		onlyTemp: false,
-		roundTemp: false,
+		roundTemp: true,
 
 		iconTable: {
 			"01d": "wi-day-sunny",

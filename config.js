@@ -22,8 +22,8 @@ var config = {
 	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
 
 	language: "en",
-	timeFormat: 24,
-	units: "metric",
+	timeFormat: 12,
+	units: "imperial",
 
 	modules: [
 		{
@@ -39,28 +39,36 @@ var config = {
 		},
 		{
 			module: "calendar",
-			header: "US Holidays",
+			header: "US Holidays!",
 			position: "top_left",
 			config: {
 				calendars: [
 					{
 						symbol: "calendar-check-o ",
 						url: "webcal://www.calendarlabs.com/templates/ical/US-Holidays.ics"
-					}
+					},
+					{
+						symbol: "calendar",
+						url: "https://calendar.google.com/calendar/ical/berres955%40gmail.com/public/basic.ics",
+					},
+					{
+						symbol: "beer",
+						url: "http://stanza.co/api/schedules/osu/m-footbl.ics",
+					},
 				]
 			}
 		},
-		{
+		/*{
 			module: "compliments",
 			position: "lower_third"
-		},
+		},*/
 		{
 			module: "currentweather",
 			position: "top_right",
 			config: {
-				location: "New York",
-				locationID: "",  //ID from http://www.openweathermap.org/help/city_list.txt
-				appid: "YOUR_OPENWEATHER_API_KEY"
+				location: "Loveland",
+				locationID: "4517140",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "f6b554debd8ab2d5b9deaf37993689bd"
 			}
 		},
 		{
@@ -68,12 +76,12 @@ var config = {
 			position: "top_right",
 			header: "Weather Forecast",
 			config: {
-				location: "New York",
-				locationID: "5128581",  //ID from http://www.openweathermap.org/help/city_list.txt
-				appid: "YOUR_OPENWEATHER_API_KEY"
+				location: "Loveland",
+				locationID: "4517140",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "f6b554debd8ab2d5b9deaf37993689bd"
 			}
 		},
-		{
+		/*{
 			module: "newsfeed",
 			position: "bottom_bar",
 			config: {
@@ -86,7 +94,7 @@ var config = {
 				showSourceTitle: true,
 				showPublishDate: true
 			}
-		},
+		},*/
 	]
 
 };
