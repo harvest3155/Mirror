@@ -10,5 +10,87 @@
  *****************************************************/
 
  body {
- 	
+
+}
+
+.wi.dimmed.wi-sunset {
+color: orange;
+}
+
+.wi.dimmed.wi-sunrise {
+color: yellow;
+}
+
+.wi-day-sunny {
+color: yellow;
+}
+
+.wi-day-cloudy {
+color: yellow;
+}
+
+.wi-rain {
+color: rgb(1, 103, 253);
+}
+
+.wi-thunderstorm {
+color: grey;
+}
+
+.wi-snow {
+color: white;
+}
+
+.wi-fog {
+color: white;
+}
+
+.wi-night-clear {
+color: white;
+}
+
+.wi-night-cloudy {
+color: grey;
+}
+
+.wi-night-showers {
+color: blue;
+}
+
+.wi-night-rain {
+color: rgb(1, 103, 253);
+}
+
+.wi-thunderstorm {
+color: yelow;
+}
+	
+.wi-night-snow {
+color: white;
+}
+
+.wi-night-alt-cloudy-windy {
+color: grey;
+}	
+
+.currentweather .humidityIcon {
+color:rgb(1, 103, 253);
+}
+
+.weatherforecast .max-temp {
+color: rgb(255, 45, 42);
+}
+
+.weatherforecast .min-temp {
+color: rgb(1, 122, 189);
+}
+
+.fa.fa-calendar-check-o{
+color: rgb(2, 216, 255)
+}
+
+.fa.fa-beer{
+color: rgb(255, 143, 0)
+}
+
  }
