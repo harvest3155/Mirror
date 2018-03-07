@@ -1,5 +1,5 @@
 # Mirror
-used to save my personal changes to mirror source code. 
+Used to save my personal changes to mirror source code in the event of a reformat or update overwrite. Used Kdiff3 to pick which lines to merge when merging my edits with source.
 
 Calendar.js - added personal mailbox ical
 
